@@ -14,7 +14,9 @@ namespace testeWindowsActivity
     {
         static void Main(string[] args)
         {
-            Processos.run();
+            string userName = Environment.UserName;
+
+            Processos.run(userName);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using testeWindowsActivity.Services;
 
 namespace testeWindowsActivity.Models
 {
@@ -12,7 +13,7 @@ namespace testeWindowsActivity.Models
         [DllImport("user32.dll")]
         private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
-        public static void run()
+        public static void run(string userName)
         {
             string processoAnterior = string.Empty;
 
@@ -22,12 +23,16 @@ namespace testeWindowsActivity.Models
 
                 if (currentProcess == null)
                     continue;
+
                 try
                 {
                     if (currentProcess.BasePriority == 8 && !currentProcess.ProcessName.Equals("explorer") && !currentProcess.MainModule.FileVersionInfo.FileDescription.Equals(processoAnterior) && !currentProcess.ProcessName.Equals("Idle"))
                     {
                         processoAnterior = currentProcess.MainModule.FileVersionInfo.FileDescription;
-                        Console.WriteLine(processoAnterior + " - " + DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss"));
+
+                        _ = new SendActivities().SendAsync(userName, processoAnterior, DateTime.Now);
+
+                        Console.WriteLine(processoAnterior + " - " + userName);
                     }
                 }
                 catch{}
@@ -46,7 +51,9 @@ namespace testeWindowsActivity.Models
             try
             {
                 uint processID;
+
                 GetWindowThreadProcessId(hwnd, out processID);
+
                 return Process.GetProcessById((int)processID);
             }
             catch { return null; }
