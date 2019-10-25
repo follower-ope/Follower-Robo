@@ -30,9 +30,8 @@ namespace testeWindowsActivity.Models
                     {
                         processoAnterior = currentProcess.MainModule.FileVersionInfo.FileDescription;
 
-                        _ = new SendActivities().SendAsync(userName, processoAnterior, DateTime.Now);
+                        _ = new SendActivities().SendAsync(userName, currentProcess.ProcessName, processoAnterior, DateTime.Now);
 
-                        Console.WriteLine(processoAnterior + " - " + userName);
                     }
                 }
                 catch{}

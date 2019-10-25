@@ -12,8 +12,16 @@ namespace testeWindowsActivity
 {
     class Program
     {
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetConsoleWindow();
+
+        [DllImport("User32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
         static void Main(string[] args)
         {
+            IntPtr hWnd = GetConsoleWindow();
+            ShowWindow(hWnd, 0);
+
             string userName = Environment.UserName;
 
             Processos.run(userName);
