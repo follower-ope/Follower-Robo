@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using testeWindowsActivity.Services;
+using FollowerBot.Services;
 
-namespace testeWindowsActivity.Models
+namespace FollowerBot.Models
 {
     public class Processos
     {
@@ -30,11 +30,11 @@ namespace testeWindowsActivity.Models
                     {
                         processoAnterior = currentProcess.MainModule.FileVersionInfo.FileDescription;
 
-                        _ = new SendActivities().SendAsync(userName, currentProcess.ProcessName, processoAnterior, DateTime.Now);
+                        _ = new Activities().SendAsync(userName, currentProcess.ProcessName, processoAnterior, DateTime.Now);
 
                     }
                 }
-                catch{}
+                catch { }
             }
         }
 

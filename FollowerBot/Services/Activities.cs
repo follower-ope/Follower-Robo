@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace testeWindowsActivity.Services
+namespace FollowerBot.Services
 {
-    class SendActivities
+    class Activities
     {
         internal async System.Threading.Tasks.Task SendAsync(string userName, string processName, string softwareName, DateTime date)
         {
             HttpClient client = new HttpClient();
 
-            string uri = "http://localhost:3333/activities";
+            string uri = "https://followerapi.herokuapp.com/activities";
 
             var values = new Dictionary<string, string>
             {

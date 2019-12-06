@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using testeWindowsActivity.Models;
+using FollowerBot.Models;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace testeWindowsActivity
+namespace FollowerBot
 {
     class Program
     {
